@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🛡️ PhishEye | Website Detection</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="hero">
+    <div class="hero-heading">
+      <img src="/static/shield.svg" alt="Shield Icon" class="shield-top" />
+      <h1><span>PhishEye</span></h1>
+      <p>AI-Powered Phishing Detection Tool</p>
+    </div>
+
+    <div class="detector-card enhanced-card">
+      <img src="/static/shield.svg" alt="Shield" class="shield-icon" />
+      <h2>PhishEye Detector</h2>
+      <p class="description">Paste a website URL to determine its legitimacy</p>
+
+      <form method="POST" class="form-inline">
+        <input type="text" name="url" placeholder="Enter website URL" required value="{{ url }}">
+        <button type="submit">🔍 Scan</button>
+      </form>
+      
+
+
+      {% if prediction %}
+      <div class="result-box {% if 'Phishing' in prediction %}phishing{% else %}legit{% endif %}">
+        <p><strong>🔎 Result:</strong> {{ prediction }}</p>
+      </div>
+      {% elif error_message %}
+        <div class="error-box">
+          <p><strong>❌ Error:</strong> {{ error_message }}</p>
+        </div>
+      {% else %}
+        <img src="/static/shield-light.svg" alt="Shield icon" class="shield-bottom" />
+        <p class="placeholder-text">Awaiting URL input...</p>
+      {% endif %}
+    </div>
+
+    
+    {% if feature_analysis %}
+<div class="feature-table">
+  <h3>📊 URL Feature Analysis</h3>
+  <div class="feature-grid">
+    <div><strong>URL Length:</strong> {{ feature_analysis.url_length }}</div>
+    <div><strong>Domain Length:</strong> {{ feature_analysis.domain_length }}</div>
+    <div><strong>HTTPS:</strong> {{ feature_analysis.has_https }}</div>
+    <div><strong>Dots:</strong> {{ feature_analysis.num_dots }}</div>
+    <div><strong>Dashes:</strong> {{ feature_analysis.num_dashes }}</div>
+    <div><strong>Digits:</strong> {{ feature_analysis.num_digits }}</div>
+    <div><strong>Subdomains:</strong> {{ feature_analysis.num_subdomains }}</div>
+    <div><strong>IP Address:</strong> {{ feature_analysis.has_ip }}</div>
+    <div><strong>Suspicious TLD:</strong> {{ feature_analysis.suspicious_tld }}</div>
+    <div><strong>URL Shortener:</strong> {{ feature_analysis.is_shortened }}</div>
+    
+  </div>
+</div>
+{% endif %}
+
+  </div>
+
+  <div class="features-section">
+    <div class="card-row">
+      <div class="info-card card-yellow">
+        <h2>🚨 Phishing Facts</h2>
+        <p class="subtext">Why early detection matters</p>
+        <ul>
+          <li>🕵️ 300,000+ new phishing sites monthly</li>
+          <li>🎯 80%+ cyberattacks start with phishing</li>
+          <li>💰 Avg breach costs exceed $4.65M</li>
+          <li>🔒 65% use HTTPS to deceive users</li>
+        </ul>
+      </div>
+
+      <div class="info-card card-purple">
+        <h2>🧠 How It Works</h2>
+        <p class="subtext">Smarter detection with AI</p>
+        <ul>
+          <li>🔎 Extracts 30+ critical URL features</li>
+          <li>🤖 Uses XGBoost + Logistic + Gaussian models</li>
+          <li>⚡ Fast, lightweight, privacy-first</li>
+          <li>📡 Works locally without sending data</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="extension-card">
+      <h2>🧩 Browser Extension Coming Soon</h2>
+      <p>Stay secure on the web with real-time protection:</p>
+      <ul>
+        <li>🔄 Real-time scanning</li>
+        <li>🛡️ Smart toolbar indicators</li>
+        <li>⛔ Instant block on threats</li>
+        <li>⚙️ Adjustable protection levels</li>
+        <li>📴 Offline functionality</li>
+      </ul>
+      <button class="preview-btn">⭐ Preview Extension</button>
+    </div>
+
+    <footer class="footer">
+      <p>© 2025 PhishEye — AI Phishing Detection</p>
+      <small>Powered by cutting-edge ML models</small>
+    </footer>
+  </div>
+</body>
+</html>
